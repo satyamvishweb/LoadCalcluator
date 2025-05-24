@@ -1,0 +1,286 @@
+// styles.scss
+
+// Base styles
+body {
+  font-family: "Arial", sans-serif;
+  margin: 0;
+  padding: 20px;
+  background-color: #f5f5f5;
+}
+.make-grid {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem; 
+
+}
+
+.make-grid > * {
+  flex: 1 1 50%; 
+  max-width: 50%;
+}
+
+
+/* styles.scss */
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background-color: #1e1e2f;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  color: white;
+  flex-wrap: wrap;
+}
+
+.nav-title {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-in-button,
+.sign-out-button {
+  background-color: #4a90e2;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.sign-in-button:hover,
+.sign-out-button:hover {
+  background-color: #357ab8;
+}
+
+/* Responsive Behavior */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    height: auto;
+    padding: 0.5rem 1rem;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .nav-center {
+    justify-content: flex-start;
+  }
+
+  .sign-in-button,
+  .sign-out-button {
+    // width: 100%;
+    text-align: center;
+  }
+}
+
+
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+// Item Form styles
+.item-form {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  .form-group {
+    margin-bottom: 15px;
+
+    input,
+    select {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      box-sizing: border-box;
+
+      &.error {
+        border-color: #e74c3c;
+      }
+    }
+
+    .error-message {
+      color: #e74c3c;
+      font-size: 12px;
+      margin-top: 5px;
+      display: block;
+    }
+  }
+
+  .checkbox-group {
+    margin: 15px 0;
+    display: flex;
+    gap: 15px;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      cursor: pointer;
+    }
+  }
+
+  .add-button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+
+    &:hover {
+      background-color: #2980b9;
+    }
+  }
+}
+
+// Load Summary styles
+.load-summary {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+
+    span:last-child {
+      font-weight: bold;
+    }
+  }
+
+  .progress-bars {
+    margin-top: 20px;
+  }
+
+  .progress-bar {
+    height: 20px;
+    background-color: #ecf0f1;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+
+    &.cbm-fill {
+      background-color: #3498db;
+    }
+
+    &.weight-fill {
+      background-color: #2ecc71;
+    }
+  }
+
+  .warning {
+    color: #e74c3c;
+    font-weight: bold;
+    margin-top: 15px;
+    padding: 10px;
+    background-color: #fadbd8;
+    border-radius: 4px;
+  }
+}
+
+// 3D Viewer styles
+.three-d-viewer {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  grid-column: 1 / -1;
+
+  h2 {
+    margin-top: 0;
+    color: #333;
+  }
+
+  .viewer-container {
+    width: 100%;
+    height: 500px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+
+  .legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 15px;
+
+    .color-box {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      margin-right: 5px;
+      border: 1px solid #ddd;
+
+      &.fragile {
+        background-color: red;
+      }
+
+      &.stackable {
+        background-color: green;
+      }
+
+      &.normal {
+        background-color: blue;
+      }
+    }
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 768px) {
+  .app-container {
+    grid-template-columns: 1fr;
+  }
+  .make-grid {
+  flex-wrap: wrap;
+  }
+  .make-grid > * {
+  flex: 1 1 100%; 
+  max-width: 100%;
+}
+}
