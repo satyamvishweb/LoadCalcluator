@@ -1,15 +1,31 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ItemForm from "./components/ItemForm";
 import LoadSummary from "./components/LoadSummary";
 import ThreeDViewer from "./components/ThreeDViewer";
 import { auth, provider } from "./Login/firebase";
 import { signInWithPopup, signOut, onAuthStateChanged } from "firebase/auth";
+import { gsap } from "gsap";
 import "./Scss/styles.scss";
 
 const App = () => {
   const [items, setItems] = useState([]);
   const [container, setContainer] = useState("20ft");
   const [user, setUser] = useState(null);
+  const nameRef = useRef(null);
+
+  // GSAP animation
+  useEffect(() => {
+    gsap.fromTo(
+      nameRef.current,
+      { opacity: 0, y: -30 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 1.5,
+        ease: "power3.out",
+      }
+    );
+  }, []);
 
   // Listen for auth state changes
   useEffect(() => {
@@ -39,45 +55,51 @@ const App = () => {
 
   return (
     <div>
-      <nav className="navbar">
-        {user ? (
-          <>
-            <div className="nav-center"></div>{" "}
-            {/* Empty to push logout right */}
-            <button className="sign-out-button mx-3" onClick={handleSignOut}>
-              Sign Out
-            </button>
-          </>
-        ) : (
-          <>
+      <div className="for-bg">
+        <nav className="navbar">
+          {user ? (
+            <>
+              <div className="nav-center"></div>
+              <button className="sign-out-button mx-3" onClick={handleSignOut}>
+                Sign Out
+              </button>
+            </>
+          ) : (
             <div className="nav-center">
               <button className="sign-in-button" onClick={handleSignIn}>
                 Sign In with Google
               </button>
             </div>
-          </>
-        )}
-      </nav>
+          )}
+        </nav>
 
-      <div style={{ paddingTop: "60px" }}>
-        {/* Your app content here, pushed down so navbar doesn't overlap */}
-        {user && (
-          <>
-            <div className="make-grid">
-              <ItemForm
-                items={items}
-                setItems={setItems}
-                container={container}
-                setContainer={setContainer}
-              />
-              <LoadSummary items={items} container={container} />
+        {/* Animated Name */}
+        <h1 ref={nameRef} className="animated-name">
+        Conatiner Load Calculator
+        </h1>
+
+        <div style={{ paddingTop: "60px" }}>
+          {user ? (
+            <>
+              <div className="make-grid">
+                <ItemForm
+                  items={items}
+                  setItems={setItems}
+                  container={container}
+                  setContainer={setContainer}
+                />
+                <LoadSummary items={items} container={container} />
+              </div>
+              {items.length > 0 && (
+                <ThreeDViewer items={items} container={container} />
+              )}
+            </>
+          ) : (
+            <div className="card-overlay mx-auto">
+              Please sign in to use the app.
             </div>
-            {items.length > 0 && (
-              <ThreeDViewer items={items} container={container} />
-            )}
-          </>
-        )}
-        {!user && <p className="text-center bg-secondary mx-auto p-5 text-light fw-bold fs-4 rounded" style={{width:"fit-content"}}>Please sign in to use the app.</p>}
+          )}
+        </div>
       </div>
     </div>
   );

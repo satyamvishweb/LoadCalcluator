@@ -1,12 +1,59 @@
 // styles.scss
 
 // Base styles
+
 body {
   font-family: "Arial", sans-serif;
   margin: 0;
-  padding: 20px;
+  // padding: 20px;
   background-color: #f5f5f5;
 }
+
+.for-bg {
+  position: relative;
+  background: url("../assets/bg.jpg") center/cover no-repeat;
+  min-height: 100vh;
+  overflow: hidden;
+  padding: 14px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(128, 128, 128, 0.5); // gray overlay
+    backdrop-filter: blur(6px); // adjust blur as needed
+    z-index: 1;
+  }
+
+  // Ensure content appears above the blur layer
+  > * {
+    position: relative;
+    z-index: 2;
+  }
+}
+
+.card-overlay {
+  background: rgba(255, 255, 255, 0.15);  // semi-transparent white
+  backdrop-filter: blur(4px);
+  color: #fafafa;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+  font-size: 1.25rem;
+  text-align: center;
+  width: fit-content;
+}
+
+.animated-name {
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 40px;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.6);
+}
+
 .make-grid {
   display: flex;
   justify-content: space-between;
@@ -105,6 +152,8 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  margin-bottom: 10px;
 
   h2 {
     margin-top: 0;
@@ -170,6 +219,8 @@ body {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  margin-bottom: 10px;
 
   h2 {
     margin-top: 0;
